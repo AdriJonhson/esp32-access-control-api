@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,6 +57,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDomain verifyAccess(String rfidCode) {
-        return modelMapper.map(userRepository.findByRfidCode(rfidCode), UserDomain.class);
+        User user = userRepository.findByRfidCode(rfidCode);
+
+        if(Objects.isNull(user)) {
+            return null;
+        }
+
+        user.setLastAccess(LocalDateTime.now());
+
+        userRepository.save(user);
+
+        return modelMapper.map(user, UserDomain.class);
     }
 }

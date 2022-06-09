@@ -5,11 +5,13 @@ import com.br.esp32.acesscontrol.dto.UserRequestDTO;
 import com.br.esp32.acesscontrol.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/users")
@@ -26,6 +28,12 @@ public class UserController {
 
     @GetMapping(value = "/verify-access", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDomain> verifyAccess(@RequestParam("rfidCode") String rfidCode) {
+        UserDomain response = userService.verifyAccess(rfidCode);
+
+        if(Objects.isNull(response)) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok(userService.verifyAccess(rfidCode));
     }
 

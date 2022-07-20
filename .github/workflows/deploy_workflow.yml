@@ -16,10 +16,7 @@ jobs:
         key: ${{ secrets.SSH_SECRET }}
         port: ${{ secrets.SERVER_PORT }}
         script: |
-          cd ~/apps/esp32-access-control-api
           export DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}}
           export DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD}}
           export DATABASE_JDBC_URL=${{secrets.DATABASE_JDBC_URL}}
-          git pull origin main
-          ./mvnw clean package -Dmaven.test.skip
-          docker compose up --build -d
+          cd ~/apps/esp32-access-control-api && ./deploy.sh

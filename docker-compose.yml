@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  esp32_access_control_api:
+    build: .
+    container_name: esp32_access_control_api
+    ports:
+      - "8080:8080"
+    networks:
+      - esp32-api-compose-network
+    restart: on-failure
+
+networks:
+  esp32-api-compose-network:
+    driver: bridge

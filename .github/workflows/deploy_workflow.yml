@@ -16,5 +16,8 @@ jobs:
         key: ${{ secrets.SSH_SECRET }}
         port: ${{ secrets.SERVER_PORT }}
         script: |
-          ls -la
-          pwd
+          cd ~/apps/esp32-access-control-api
+          git pull origin main
+          ./mvnw clean package -Dmaven.test.skip
+          VARIAVEL_TEST=test
+          docker compose up --build -d

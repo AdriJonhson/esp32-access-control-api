@@ -17,7 +17,9 @@ jobs:
         port: ${{ secrets.SERVER_PORT }}
         script: |
           cd ~/apps/esp32-access-control-api
-          VARIAVEL_TEST='test'
+          DATABASE_USERNAME = ${{secrets.DATABASE_USERNAME}}
+          DATABASE_PASSWORD = ${{secrets.DATABASE_PASSWORD}}
+          DATABASE_JDBC_URL = ${{secrets.DATABASE_JDBC_URL}}
           git pull origin main
           ./mvnw clean package -Dmaven.test.skip
           docker compose up --build -d

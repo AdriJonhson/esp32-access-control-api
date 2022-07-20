@@ -17,7 +17,7 @@ jobs:
         port: ${{ secrets.SERVER_PORT }}
         script: |
           cd ~/apps/esp32-access-control-api
+          VARIAVEL_TEST='test'
           git pull origin main
           ./mvnw clean package -Dmaven.test.skip
-          VARIAVEL_TEST=test
           docker compose up --build -d

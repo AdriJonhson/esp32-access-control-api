@@ -1,4 +1,4 @@
-from openjdk:11 -alpine
+from openjdk:11
 
 COPY ./target/acesscontrol-0.0.1-SNAPSHOT.jar /app/acesscontrol-0.0.1-SNAPSHOT.jar
 

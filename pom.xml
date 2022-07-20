@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>acesscontrol</name>
 	<description>Service to acess control by Esp32</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

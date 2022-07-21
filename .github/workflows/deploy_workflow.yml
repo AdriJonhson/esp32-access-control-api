@@ -13,8 +13,8 @@ jobs:
     - name: testing ssh connection
       uses: appleboy/ssh-action@master
       with:
-        host: 147.182.191.7
-        username: root
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SSH_SECRET }}
         port: ${{ secrets.SERVER_PORT }}
         script: |

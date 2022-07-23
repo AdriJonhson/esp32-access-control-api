@@ -2,6 +2,10 @@ userName=$1
 password=$2
 jdbcUrl=$3
 
+echo $userName
+echo $password
+echo $jdbcUrl
+
 export DATABASE_USERNAME=$userName
 export DATABASE_PASSWORD=$password
 export DATABASE_JDBC_URL=$jdbcUrl

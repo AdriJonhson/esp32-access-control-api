@@ -29,9 +29,9 @@ jobs:
     - name: Configure Environment
       run: |
           mkdir -p ~/.scripts/
-          echo "export DATABASE_USERNAME=$DATABASE_USERNAME" > ~/.scripts/startup.sh
-          echo "export DATABASE_PASSWORD=$DATABASE_PASSWORD" > ~/.scripts/startup.sh
-          echo "export DATABASE_JDBC_URL=$DATABASE_JDBC_URL" > ~/.scripts/startup.sh
+          echo "export DATABASE_USERNAME=$DATABASE_USERNAME" >> ~/.scripts/startup.sh
+          echo "export DATABASE_PASSWORD=$DATABASE_PASSWORD" >> ~/.scripts/startup.sh
+          echo "export DATABASE_JDBC_URL=$DATABASE_JDBC_URL" >> ~/.scripts/startup.sh
           cat ~/.scripts/startup.sh
       env:
         SSH_HOST: ${{ secrets.SERVER_HOST }}

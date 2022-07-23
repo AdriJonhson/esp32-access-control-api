@@ -53,4 +53,4 @@ jobs:
         SSH_KEY: ${{ secrets.SSH_SECRET }}  
 
     - name: Deploy
-      run: ssh staging 'pwd'
+      run: ssh staging 'ls -la'

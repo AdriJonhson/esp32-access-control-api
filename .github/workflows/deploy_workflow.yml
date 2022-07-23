@@ -33,6 +33,7 @@ jobs:
           echo "export DATABASE_PASSWORD=$DATABASE_PASSWORD" >> ~/.scripts/startup.sh
           echo "export DATABASE_JDBC_URL=$DATABASE_JDBC_URL" >> ~/.scripts/startup.sh
           cat ~/.scripts/startup.sh
+          chmod +x ~/.scripts/startup.sh
       env:
         SSH_HOST: ${{ secrets.SERVER_HOST }}
         SSH_USER: ${{ secrets.SERVER_USER }}
@@ -41,6 +42,6 @@ jobs:
         DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
         DATABASE_JDBC_URL: ${{secrets.DATABASE_JDBC_URL}}
 
-    - name: Deploy
+    - name: Apply Environment
       run: |
-        ssh staging
+        ssh staging 'bash -s' < ~/.scripts/startup.sh

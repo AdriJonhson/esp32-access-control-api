@@ -2,11 +2,6 @@ userName=$1
 password=$2
 jdbcUrl=$3
 
-echo "First arg: $1"
-echo "Second arg: $2"
-echo "Third arg: $3"
-
-
 export DATABASE_USERNAME=userName
 export DATABASE_PASSWORD=password
 export DATABASE_JDBC_URL=jdbcUrl

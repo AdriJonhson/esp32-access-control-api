@@ -45,3 +45,7 @@ jobs:
     - name: Apply Environment
       run: |
         ssh staging 'bash -s' < ~/.scripts/startup.sh
+    
+    - name: Deploy
+      run: |
+        ssh staging 'cd ~/apps/esp32-access-control-api && ./deploy.sh'

@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: testing ssh connection
-      uses: appleboy/ssh-action@master
+      uses: fifsky/ssh-action@master
+      # uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USER }}
+        user: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SSH_SECRET }}
         port: ${{ secrets.SERVER_PORT }}
-        passphrase: ${{ secrets.SSH_PASSWORD }}
-        debut: true
+        pass: ${{ secrets.SSH_PASSWORD }}
         script: |
           export DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}}
           export DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD}}

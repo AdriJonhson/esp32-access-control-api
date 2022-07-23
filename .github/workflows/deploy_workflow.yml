@@ -1,3 +1,28 @@
+# name: Deployment Workflow
+# on:
+#   workflow_dispatch:
+
+#   push:
+#     branches: [main]
+
+# jobs:
+#   job_one:
+#     name: Deploy
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: testing ssh connection
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ secrets.SERVER_HOST }}
+#         username: ${{ secrets.SERVER_USER }}
+#         key: ${{ secrets.SSH_SECRET }}
+#         port: ${{ secrets.SERVER_PORT }}
+#         script: |
+#           export DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}}
+#           export DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD}}
+#           export DATABASE_JDBC_URL=${{secrets.DATABASE_JDBC_URL}}
+#           cd ~/apps/esp32-access-control-api && ./deploy.sh
+
 name: Deployment Workflow
 on:
   workflow_dispatch:
@@ -10,15 +35,22 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: testing ssh connection
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SSH_SECRET }}
-        port: ${{ secrets.SERVER_PORT }}
-        script: |
-          export DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}}
-          export DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD}}
-          export DATABASE_JDBC_URL=${{secrets.DATABASE_JDBC_URL}}
-          cd ~/apps/esp32-access-control-api && ./deploy.sh
+    - name: Configure SSH
+      run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/staging.key
+            StrictHostKeyChecking no
+          END
+      env:
+        SSH_HOST: ${{ secrets.SERVER_HOST }}
+        SSH_USER: ${{ secrets.SERVER_USER }}
+        SSH_KEY: ${{ secrets.SSH_SECRET }}  
+
+    - name: Deploy
+      run: ssh staging 'pwd'

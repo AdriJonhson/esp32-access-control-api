@@ -17,7 +17,8 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SSH_SECRET }}
         port: ${{ secrets.SERVER_PORT }}
-        password: ${{ secrets.SSH_PASSWORD }}
+        passphrase: ${{ secrets.SSH_PASSWORD }}
+        debut: true
         script: |
           export DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}}
           export DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD}}

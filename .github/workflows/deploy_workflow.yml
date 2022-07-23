@@ -29,7 +29,7 @@ jobs:
 
     - name: Deploy
       run: |
-        ssh staging && ls -la
+        ssh staging && pwd
       env:
         DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
         DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}

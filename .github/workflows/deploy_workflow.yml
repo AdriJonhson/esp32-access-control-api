@@ -32,6 +32,9 @@ jobs:
           echo "export DATABASE_USERNAME=$DATABASE_USERNAME" >> ~/.scripts/startup.sh
           echo "export DATABASE_PASSWORD=$DATABASE_PASSWORD" >> ~/.scripts/startup.sh
           echo "export DATABASE_JDBC_URL=$DATABASE_JDBC_URL" >> ~/.scripts/startup.sh
+          echo "echo $DATABASE_USERNAME" >> ~/.scripts/startup.sh
+          echo "echo $DATABASE_PASSWORD" >> ~/.scripts/startup.sh
+          echo "echo $DATABASE_JDBC_URL" >> ~/.scripts/startup.sh
           echo "cd ~/apps/esp32-access-control-api && ./deploy.sh" >> ~/.scripts/startup.sh
           cat ~/.scripts/startup.sh
           chmod +x ~/.scripts/startup.sh
@@ -46,4 +49,3 @@ jobs:
     - name: Apply Environment and Deploy
       run: |
         ssh staging 'bash -s' < ~/.scripts/startup.sh
-

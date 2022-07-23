@@ -26,11 +26,21 @@ jobs:
         SSH_HOST: ${{ secrets.SERVER_HOST }}
         SSH_USER: ${{ secrets.SERVER_USER }}
         SSH_KEY: ${{ secrets.SSH_SECRET }}  
-
-    - name: Deploy
+    - name: Configure Environment
       run: |
-        ssh staging && pwd
+          mkdir -p ~/.scripts/
+          echo "export DATABASE_USERNAME=$DATABASE_USERNAME" > ~/.scripts/startup.sh
+          echo "export DATABASE_PASSWORD=$DATABASE_PASSWORD" > ~/.scripts/startup.sh
+          echo "export DATABASE_JDBC_URL=$DATABASE_JDBC_URL" > ~/.scripts/startup.sh
+          cat ~/.scripts/startup.sh
       env:
+        SSH_HOST: ${{ secrets.SERVER_HOST }}
+        SSH_USER: ${{ secrets.SERVER_USER }}
+        SSH_KEY: ${{ secrets.SSH_SECRET }}  
         DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
         DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
         DATABASE_JDBC_URL: ${{secrets.DATABASE_JDBC_URL}}
+
+    - name: Deploy
+      run: |
+        ssh staging

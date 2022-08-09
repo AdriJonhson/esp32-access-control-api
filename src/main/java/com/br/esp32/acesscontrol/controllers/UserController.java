@@ -1,11 +1,11 @@
 package com.br.esp32.acesscontrol.controllers;
 
 import com.br.esp32.acesscontrol.domain.UserDomain;
+import com.br.esp32.acesscontrol.dto.RequestCardCodeDTO;
 import com.br.esp32.acesscontrol.dto.UserRequestDTO;
 import com.br.esp32.acesscontrol.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,4 +52,19 @@ public class UserController {
         return ResponseEntity.ok(userService.update(userId, request));
     }
 
+    @PostMapping(value = "request-rfid-code",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> requestRfidCode(@RequestBody RequestCardCodeDTO request) {
+        userService.requestUserRfidCode(request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(value = "send-rfid-code",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> sendRfidCode(@RequestBody RequestCardCodeDTO request) {
+        userService.sendUserRfidCode(request);
+        return ResponseEntity.ok().build();
+    }
 }

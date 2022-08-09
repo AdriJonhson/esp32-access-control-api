@@ -4,6 +4,7 @@ import com.br.esp32.acesscontrol.domain.UserDomain;
 import com.br.esp32.acesscontrol.dto.RequestCardCodeDTO;
 import com.br.esp32.acesscontrol.dto.UserRequestDTO;
 import com.br.esp32.acesscontrol.services.UserService;
+import io.micrometer.core.instrument.Metrics;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/api/users")
@@ -29,6 +31,8 @@ public class UserController {
 
     @GetMapping(value = "/verify-access", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDomain> verifyAccess(@RequestParam("rfidCode") String rfidCode) {
+        Metrics.counter("files.transferred").increment(new Random().nextInt(10));
+
         UserDomain response = userService.verifyAccess(rfidCode);
 
         if(Objects.isNull(response)) {

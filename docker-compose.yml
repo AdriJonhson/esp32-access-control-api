@@ -8,6 +8,7 @@ services:
         - DATABASE_USERNAME=$DATABASE_USERNAME
         - DATABASE_PASSWORD=$DATABASE_PASSWORD
         - DATABASE_JDBC_URL=$DATABASE_JDBC_URL
+        - HUMIO_TOKEN=$HUMIO_TOKEN
     container_name: esp32_access_control_api
     ports:
       - "8080:8080"

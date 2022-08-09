@@ -17,6 +17,7 @@ import java.util.Objects;
 @RequestMapping("/api/users")
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin
 public class UserController {
 
     private final UserService userService;

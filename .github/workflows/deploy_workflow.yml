@@ -47,6 +47,9 @@ jobs:
         DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
         DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
         DATABASE_JDBC_URL: ${{secrets.DATABASE_JDBC_URL}}
+        RABBITMQ_HOST: ${{secrets.RABBITMQ_HOST}}
+        RABBITMQ_USERNAME: ${{secrets.RABBITMQ_USERNAME}}
+        RABBITMQ_PASSWORD: ${{secrets.RABBITMQ_PASSWORD}}
 
     - name: Apply Environment and Deploy
       run: |

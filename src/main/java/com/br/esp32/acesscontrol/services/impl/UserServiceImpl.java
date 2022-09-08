@@ -80,7 +80,11 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
-        return modelMapper.map(user, UserDomain.class);
+        UserDomain userData = modelMapper.map(user, UserDomain.class);
+
+        webSocket.convertAndSend("/topic/new-access", userData);
+
+        return userData;
     }
     @Override
     public void requestUserRfidCode(RequestCardCodeDTO requestCardCodeDTO) {
